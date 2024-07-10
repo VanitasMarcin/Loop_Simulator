@@ -1,0 +1,77 @@
+{
+    "Params": 
+    {
+        "Tp": 0.01,
+        "SimTime": 100
+    },
+    "Signal":
+    [
+        {"type": "signal_base"}, {"type": "step", "amplitude": 1, "start": 0, "stop": 200}, {"type": "sin", "amplitude": 1, "frequency": 2, "start": 0, "stop": 200},
+        {"type": "rec", "amplitude": 1, "frequency": 2, "duty_cycle": 0.5, "start": 0, "stop": 200}, {"type": "tri", "amplitude": 1, "frequency": 2, "duty_cycle": 0.5, "start": 0, "stop": 200},
+        {"type": "noise", "mean": 0, "variance": 0.5, "start": 0, "stop": 200}
+    ],
+    "System":    
+    [
+        {
+            "type": "petla",
+            "structure": "close",
+            "basic": "main",
+            "elements": [
+                {
+                    "type": "pid",
+                    "k": 0.5,
+                    "TI": 2,
+                    "TD": 0
+                },
+                {
+                    "type": "arx",
+                    "A": [-0.4],
+                    "B": [0.6],
+                    "delay_order": 1,
+                    "standard_deviation": 0
+                },
+                {
+                    "type": "static",
+                    "x_left": -1,
+                    "x_right": 1
+                },
+                {
+                    "type": "petla",
+                    "structure": "close",
+                    "elements": [
+                        {
+                            "type": "pid",
+                            "k": 1,
+                            "TI": 2,
+                            "TD": 0
+                        },
+                        {
+                            "type": "arx",
+                            "A": [-0.4],
+                            "B": [0.6],
+                            "delay_order": 1,
+                            "standard_deviation": 0
+                        }
+                    ]
+                },
+                {
+                    "type": "petla",
+                    "structure": "close",
+                    "elements": [
+                        {
+                            "type": "pid",
+                            "k": 1,
+                            "TI": 2,
+                            "TD": 0
+                        },
+                        {
+                            "type": "petla",
+                            "structure": "close",
+                            "elements": []
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

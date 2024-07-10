@@ -1,0 +1,22 @@
+CXX=g++
+CXXFLAGS="-std=c++17"
+OUTPUT="program"
+
+SOURCES=(
+    "program.cpp"
+    "./Konfiguracja/CLI.cpp"
+    "./Obiekty/ObiektStatyczny.cpp"
+    "./Konfiguracja/Configuration.cpp"
+    "./Obiekty/PetlaUAR.cpp"
+    "./Generator/Step_gen.cpp"
+    "./Generator/Sin_gen.cpp"
+    "./Generator/Signal_base.cpp"
+    "./Generator/Decorator.cpp"
+    "./Generator/White_noise_gen.cpp"
+    "./Generator/Rec_gen.cpp"
+    "./Generator/Triangle_gen.cpp"
+    "./Obiekty/ModelARX.cpp"
+    "./Obiekty/RegulatorPID.cpp"
+)
+
+$CXX $CXXFLAGS "${SOURCES[@]}" -o $OUTPUT
